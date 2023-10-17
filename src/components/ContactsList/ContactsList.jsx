@@ -2,12 +2,14 @@ import { ContactListItem } from 'components/ContactItem/ContactItem';
 import React, { Component } from 'react';
 
 export default class ContactsList extends Component {
-  componentDidMount() {
-    const localData = localStorage.getItem('contacts');
-    if (localData) {
-      this.props.updateContactsFromLocalStorage(JSON.parse(localData));
-    }
-  }
+  // componentDidMount() {
+  //   const localData = localStorage.getItem('contacts');
+  //   if (!localData || JSON.parse(localData).length === 0) {
+  //     this.props.updateContactsFromLocalStorage(this.props.defaultContacts);
+  //   } else {
+  //     this.props.updateContactsFromLocalStorage(JSON.parse(localData));
+  //   }
+  // }
 
   componentDidUpdate(prevProps) {
     if (prevProps.contacts.length !== this.props.contacts.length) {

@@ -14,6 +14,19 @@ export default class App extends Component {
     ],
     filter: '',
   };
+  componentDidMount() {
+    const localData = localStorage.getItem('contacts');
+    if (!localData || JSON.parse(localData).length === 0) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    } else {
+      this.setState({ contacts: JSON.parse(localData) });
+    }
+  }
+  // componentDidUpdate(_, prevState) {
+  //   if (prevState.contacts !== this.state.contacts) {
+  //     localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  //   }
+  // }
   createContact = dataByForm => {
     const { contacts } = this.state;
     const contactName = dataByForm.name.toLowerCase();
@@ -48,9 +61,9 @@ export default class App extends Component {
     }));
   };
 
-  updateContactsFromLocalStorage = newContacts => {
-    this.setState({ contacts: newContacts });
-  };
+  // updateContactsFromLocalStorage = newContacts => {
+  //   this.setState({ contacts: newContacts });
+  // };
 
   render() {
     return (
@@ -64,7 +77,8 @@ export default class App extends Component {
             contacts={this.state.contacts}
             filter={this.state.filter}
             deleteContact={this.deleteContact}
-            updateContactsFromLocalStorage={this.updateContactsFromLocalStorage}
+            // updateContactsFromLocalStorage={this.updateContactsFromLocalStorage}
+            // defaultContacts={this.state.contacts}
           />
         </Section>
       </>
