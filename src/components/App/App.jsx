@@ -22,11 +22,11 @@ export default class App extends Component {
       this.setState({ contacts: JSON.parse(localData) });
     }
   }
-  // componentDidUpdate(_, prevState) {
-  //   if (prevState.contacts !== this.state.contacts) {
-  //     localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-  //   }
-  // }
+  componentDidUpdate(_, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
   createContact = dataByForm => {
     const { contacts } = this.state;
     const contactName = dataByForm.name.toLowerCase();
