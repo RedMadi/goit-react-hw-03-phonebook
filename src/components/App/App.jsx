@@ -60,12 +60,14 @@ export default class App extends Component {
       contacts: prevState.contacts.filter(contact => contact.id !== id),
     }));
   };
-
-  // updateContactsFromLocalStorage = newContacts => {
-  //   this.setState({ contacts: newContacts });
-  // };
-
   render() {
+    const { contacts, filter } = this.state;
+
+    const filteredContacts = filter
+      ? contacts.filter(contact =>
+          contact.name.toLowerCase().includes(filter.toLowerCase())
+        )
+      : contacts;
     return (
       <>
         <Section title="Phonebook">
@@ -74,11 +76,8 @@ export default class App extends Component {
         <Section title="Contacts">
           <Filter filterContacts={this.filterContacts} />
           <ContactsList
-            contacts={this.state.contacts}
-            filter={this.state.filter}
+            contacts={filteredContacts}
             deleteContact={this.deleteContact}
-            // updateContactsFromLocalStorage={this.updateContactsFromLocalStorage}
-            // defaultContacts={this.state.contacts}
           />
         </Section>
       </>
